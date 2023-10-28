@@ -26,6 +26,7 @@ def compare_files():
                 file1.save(temp_file1.name)
                 article_epub_file_path = temp_file1.name
 
+                # TODO Add here the rest of the conversion
                 output = pypandoc.convert_file(
                     source_file=article_epub_file_path,
                     format="epub",
