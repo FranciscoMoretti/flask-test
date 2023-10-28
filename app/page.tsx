@@ -5,16 +5,16 @@ import { ChangeEvent, useState } from 'react';
 
 
 export default function FileComparison() {
-  const [file1, setFile1] = useState(null);
-  const [file2, setFile2] = useState(null);
+  const [file1, setFile1] = useState<File | null>(null);
+  const [file2, setFile2] = useState<File | null>(null);
   const [commonText, setCommonText] = useState('');
 
   const handleFile1Change = (e:  ChangeEvent<HTMLInputElement>) => {
-    setFile1(e.target.files?[0]);
+    setFile1(e.target.files ? e.target.files[0] : null);
   };
 
   const handleFile2Change = (e:  ChangeEvent<HTMLInputElement>) => {
-    setFile2(e.target.files?[0]);
+    setFile2(e.target.files ? e.target.files[0] : null);
   };
 
   const compareFiles = async () => {
