@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 
 export default function FileComparison() {
@@ -9,18 +9,20 @@ export default function FileComparison() {
   const [file2, setFile2] = useState(null);
   const [commonText, setCommonText] = useState('');
 
-  const handleFile1Change = (e) => {
-    setFile1(e.target.files[0]);
+  const handleFile1Change = (e:  ChangeEvent<HTMLInputElement>) => {
+    setFile1(e.target.files?[0]);
   };
 
-  const handleFile2Change = (e) => {
-    setFile2(e.target.files[0]);
+  const handleFile2Change = (e:  ChangeEvent<HTMLInputElement>) => {
+    setFile2(e.target.files?[0]);
   };
 
   const compareFiles = async () => {
     const formData = new FormData();
-    formData.append('file1', file1);
-    formData.append('file2', file2);
+    if (file1)
+      formData.append('file1', file1);
+    if (file2)
+      formData.append('file2', file2);
 
     try {
       const response = await fetch('/api/compare-files', {
